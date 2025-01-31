@@ -2,7 +2,7 @@
   "main": "lib/index.js",
   "scripts": {
     "start": "node lib/index.js",
-    "build": "tsc -b && vite build",
+    "build": "vite build",
     "build:watch": "tsc --watch",
     "dev": "vite",
     "lint": "eslint .",
