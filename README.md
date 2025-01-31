@@ -24,11 +24,13 @@ You can access the deployed application here:
 
 ## How It Works
 
-1. **User Input**: The user enters their class level (e.g., "Intermediate" or "Advanced") into the input field.
-2. **Quiz Generation**: Upon submitting the form, the app generates a quiz with 10 multiple-choice questions related to Python programming, using Google's Generative AI.
-3. **Answering Questions**: The user answers the questions, and after each question, the app provides immediate feedback on whether the answer was correct.
-4. **Viewing Score**: At the end of the quiz, the user sees their total score, which is the number of correct answers.
-5. **Retake Option**: After reviewing the score, users can retake the quiz by clicking the "Retake Quiz" button.
+1. **Select Chatbot**: Choose between **Charlie** or **Cooler Charlie** for your interactive Python lessons.
+2. **Interactive Learning**: The chatbot will provide explanations, answer questions, and guide you through Python programming concepts.
+3. **Quiz Generation**: After completing the lesson with the chatbot, you can generate a quiz by selecting your class level (e.g., "Intermediate" or "Advanced").
+4. **Answer Questions**: The quiz consists of 10 multiple-choice questions. Answer each question, and the app will provide instant feedback.
+5. **Viewing Score**: After the quiz, you’ll see your total score out of 10.
+6. **Retake Quiz**: After reviewing your score, you can retake the quiz to improve your performance.
+
 
 ## Setup and Usage
 
@@ -43,20 +45,20 @@ Before running the app locally, make sure you have the following installed:
 1. **Clone the Repository**:  
    Clone this repository to your local machine using the following command:
    ```bash
-   git clone https://github.com/your-username/python-tutor-quiz.git
+   git clone https://github.com/Rudyshhh/skc-Rudraksh-tutor.git
    ```
 
 2. **Install Dependencies**:  
    Navigate to the project directory and install the required dependencies:
    ```bash
-   cd python-tutor-quiz
+   cd skc-Rudraksh-tutor
    npm install
    ```
 
 3. **Set Your API Key**:  
    To use the Generative AI model, you'll need a valid API key.  
    - Open the `key.js` file.
-   - Replace the placeholder `API_KEY` with your actual API key. For example:
+   - Replace the placeholder `API_KEY` with your actual GEMINI API key. For example:
      ```javascript
      export const API_KEY = "YOUR_GOOGLE_GENERATIVE_API_KEY";
      ```
@@ -82,12 +84,13 @@ If you wish to use your own API key, simply update the `key.js` file:
 1. Open `key.js`.
 2. Replace the placeholder with your own API key.
 
-
+## Switching Between Chatbots
+To switch between Charlie and Cooler Charlie, users can select either of the two AI chatbots before starting their lesson. Once a chatbot is selected, it will guide users through a Python lesson. After completing the lesson, users will have the option to take the quiz.
 
 ## Technologies Used
 
 - **React**: JavaScript library for building the user interface.
-- **Google Generative AI**: Powers the dynamic quiz generation based on the provided class level.
+- **Google Generative AI**: Powers the chatbot and dynamic quiz generation based on the provided class level.
 - **Vercel**: Deployed the app using Vercel for seamless hosting.
 
 
