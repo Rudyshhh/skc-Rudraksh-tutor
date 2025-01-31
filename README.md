@@ -99,4 +99,3 @@ If you'd like to contribute to this project, feel free to fork the repository an
 ---
 
 Thank you for using the Python Tutor Quiz App! Enjoy testing and improving your Python skills!
-```
