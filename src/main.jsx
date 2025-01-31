@@ -1,5 +1,5 @@
 
-import App from './tutor'
+import App from './App'
 
 import './index.css'
 

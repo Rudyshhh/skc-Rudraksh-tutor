@@ -5,7 +5,7 @@ import { LogOut } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button"
 
-const API_KEY = "";
+const API_KEY = "AIzaSyDHn-oScIvJPt5td5SKqz7fFYLPS2bq_mo";
 const MAX_RETRIES = 100;
 const RETRY_DELAY = 1000;
 

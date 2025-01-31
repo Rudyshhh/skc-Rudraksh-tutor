@@ -132,7 +132,7 @@ export default function PythonTutor() {
   return (
     <div className="min-h-screen bg-gray-900 text-white">
       <header className="bg-teal-900 p-4 flex justify-between items-center">
-        <Link to="/parent" className="flex items-center space-x-2">
+        <Link to="/" className="flex items-center space-x-2">
           <img
             className="h-14 w-14 text-yellow-400"
             src="/logo.png"
@@ -161,7 +161,10 @@ export default function PythonTutor() {
             title="Variables"
             content="A variable is like a box where you can store information. You can put things in the box and give it a name, like 'x' or 'age', to keep track of them."
           />
-          
+          <Card
+            title="Loops"
+            content="A loop lets you do the same thing over and over again. For example, you can tell the computer to print 'Hello' 5 times with just one line of code!"
+          />
         </div>
 
         {!showChat && !isQuizMode && (
@@ -211,7 +214,7 @@ export default function PythonTutor() {
 
         {!isQuizMode && (
           <div className="text-center mt-8">
-            <Link to="/quiz">
+            <Link to="/PYQuiz">
               <Button className="w-full max-w-md mx-auto block">
                 Click here for quiz!
               </Button>
