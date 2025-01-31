@@ -42,7 +42,7 @@
     "markdown-it": "^14.1.0",
     "mongodb": "^6.9.0",
     "mongoose": "^8.7.0",
-    "next": "^14.2.13",
+    "next": "^14.2.23",
     "pdf-lib": "^1.17.1",
     "pdf.js-extract": "^0.2.1",
     "pdfjs-dist": "^4.7.76",
