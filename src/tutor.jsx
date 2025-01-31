@@ -214,7 +214,7 @@ export default function PythonTutor() {
 
         {!isQuizMode && (
           <div className="text-center mt-8">
-            <Link to="/PYQuiz">
+            <Link to="/PQuiz">
               <Button className="w-full max-w-md mx-auto block">
                 Click here for quiz!
               </Button>

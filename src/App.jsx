@@ -3,7 +3,7 @@ import React from 'react';
 import Home from './components/home';
 import ScrollToTop from './components/scroll';
 import PythonTutor from './tutor'; 
-import PYQuiz from './PYQuiz';
+import PQuiz from './PYQuiz';
 
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 
@@ -14,7 +14,7 @@ function App() {
       <ScrollToTop />
       <Routes>
       <Route path="/" exact element={<PythonTutor/>}></Route>
-      <Route path="/PYQuiz" element={<PYQuiz />} />
+      <Route path="/PQuiz" element={<PQuiz />} />
       </Routes>
     </div>
   );

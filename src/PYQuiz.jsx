@@ -9,7 +9,7 @@ const API_KEY = "AIzaSyDHn-oScIvJPt5td5SKqz7fFYLPS2bq_mo";
 const MAX_RETRIES = 100;
 const RETRY_DELAY = 1000;
 
-function PYQuiz() {
+function PQuiz() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [quiz, setQuiz] = useState(null);
@@ -213,4 +213,4 @@ function PYQuiz() {
   );
 }
 
-export default PYQuiz;
+export default PQuiz;
