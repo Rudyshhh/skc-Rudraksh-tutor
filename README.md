@@ -1,10 +1,10 @@
-# Python Tutor Quiz App
+# Python Tutor 
 
-Welcome to the **Python Tutor Quiz App**, a web application designed to help students practice Python through dynamic and high-difficulty quizzes. The app generates Python programming quizzes tailored to a student's class level and evaluates their knowledge with multiple-choice questions.
+Welcome to the **Python Tutor Chatbot App**, a web application designed to help students learn Python through interactive lessons and quizzes. The app features an AI-powered chatbot that assists students in learning Python programming concepts, answering questions, and guiding them through lessons.
 
-Once the quiz is completed, the user can review their score and retake the quiz to further improve their knowledge. The quiz content is generated using Google's generative AI, which ensures that the quizzes are challenging and relevant.
+Once the lesson is completed, users have the option to take a dynamic Python quiz tailored to their class level. The app also features a high-difficulty quiz that is generated using Google's generative AI to test the user's Python knowledge.
 
-Additionally, the app allows users to interact with AI chatbots like **Charlie** and **Cooler Charlie**. These chatbots assist in learning Python by providing lessons and explanations for various Python topics. Users can choose which chatbot they prefer to learn from by selecting between **Charlie** and **Cooler Charlie**.
+Additionally, the app lets users choose between two AI chatbots: **Charlie** and **Cooler Charlie**, each offering a unique way to learn Python. After selecting a chatbot, users can interact with the AI to get lessons and explanations.
 
 
 ### Deployed App Link:
@@ -13,12 +13,13 @@ You can access the deployed application here:
 
 ## Features
 
+- **AI Chatbots for Learning**: Choose between **Charlie** or **Cooler Charlie**, two chatbots that help explain Python concepts and provide interactive lessons. You can select **Charlie** to learn more about Python concepts and get personalized lessons.
 - **Dynamic Quiz Generation**: The app generates 10 high-difficulty multiple-choice questions based on the student's input class level.
 - **Instant Feedback**: Once the user answers each question, the app shows whether the answer is correct or incorrect, and highlights the correct answer.
 - **Score Calculation**: After finishing the quiz, the user's score is displayed out of 10, allowing them to evaluate their performance.
 - **Retake Quiz Option**: After completing the quiz, users can retake it without having to reload the page, giving them an opportunity to improve their score.
 - **Responsive Design**: The app works seamlessly across devices and screen sizes, ensuring a smooth user experience on both mobile and desktop.
-- **AI Chatbots for Learning**: Choose between **Charlie** or **Cooler Charlie**, two chatbots that help explain Python concepts and provide interactive lessons. You can select **Charlie** to learn more about Python concepts and get personalized lessons.
+
   
 
 ## How It Works
