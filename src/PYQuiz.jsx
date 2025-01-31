@@ -1,9 +1,8 @@
 import React, { useState, useCallback } from "react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { Menu, Loader2 } from "lucide-react";
-import { LogOut } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Button } from "@/components/ui/button"
+import { Menu, Loader2, LogOut } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 const API_KEY = "AIzaSyDHn-oScIvJPt5td5SKqz7fFYLPS2bq_mo";
 const MAX_RETRIES = 100;
@@ -17,6 +16,8 @@ function PQuiz() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [showAnswer, setShowAnswer] = useState(false);
+  const [score, setScore] = useState(0);
+  const [quizFinished, setQuizFinished] = useState(false);
 
   const genAI = new GoogleGenerativeAI(API_KEY);
 
@@ -37,13 +38,13 @@ function PQuiz() {
 
   const parseQuizData = (text) => {
     const questions = text.split(/\d+\./).slice(1);
-    return questions.map(q => {
-      const [questionText, ...optionsAndAnswer] = q.trim().split('\n');
-      const options = optionsAndAnswer.slice(0, 4).map(option => {
-        const [key, value] = option.split(') ');
+    return questions.map((q) => {
+      const [questionText, ...optionsAndAnswer] = q.trim().split("\n");
+      const options = optionsAndAnswer.slice(0, 4).map((option) => {
+        const [key, value] = option.split(") ");
         return { key: key.trim(), value: value.trim() };
       });
-      const correctAnswer = optionsAndAnswer[4].split(': ')[1].trim();
+      const correctAnswer = optionsAndAnswer[4].split(": ")[1].trim();
       return { question: questionText.trim(), options, correctAnswer };
     });
   };
@@ -51,20 +52,22 @@ function PQuiz() {
   const fetchQuizData = useCallback(async (retryCount = 0) => {
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
     const prompt = generateQuizPrompt(classLevel);
-    
+
     try {
       const result = await model.generateContent(prompt);
       const response = await result.response;
       const text = response.text();
       console.log(text);
       const parsedData = parseQuizData(text);
-      
+
       if (parsedData.length !== 10) {
         throw new Error("Invalid quiz data");
       }
-      
+
       setQuiz(parsedData);
       setError(null);
+      setScore(0);
+      setQuizFinished(false);
     } catch (error) {
       console.error("Error fetching data:", error);
       if (retryCount < MAX_RETRIES) {
@@ -88,6 +91,10 @@ function PQuiz() {
   const handleAnswer = (answer) => {
     setSelectedAnswer(answer);
     setShowAnswer(true);
+
+    if (answer === quiz[currentQuestionIndex].options.find(o => o.key === quiz[currentQuestionIndex].correctAnswer).value) {
+      setScore(score + 1);
+    }
   };
 
   const nextQuestion = () => {
@@ -96,12 +103,12 @@ function PQuiz() {
       setSelectedAnswer(null);
       setShowAnswer(false);
     } else {
-      alert("Quiz completed!");
+      setQuizFinished(true);
     }
   };
 
   const handleLogout = () => {
-    navigate('/');
+    navigate("/");
   };
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -116,7 +123,7 @@ function PQuiz() {
             src="/logo.png"
             alt="Soulace logo"
           />
-          <h1 className="text-3xl font-bold random">Python Tutor</h1>
+          <h1 className="text-3xl font-bold">Python Tutor</h1>
         </Link>
         <button
           className="md:hidden"
@@ -131,7 +138,9 @@ function PQuiz() {
         <form onSubmit={handleSubmit} className="mb-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label htmlFor="classLevel" className="block mb-2 text-sm font-medium">Class Level</label>
+              <label htmlFor="classLevel" className="block mb-2 text-sm font-medium">
+                Class Level
+              </label>
               <input
                 type="text"
                 className="w-full p-2 bg-gray-800 rounded border border-gray-700 focus:ring-2 focus:ring-teal-500"
@@ -164,7 +173,7 @@ function PQuiz() {
             {error}
           </div>
         )}
-        {quiz && (
+        {quiz && !quizFinished && (
           <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
             <h3 className="text-xl font-bold mb-4">
               Question {currentQuestionIndex + 1} of {quiz.length}
@@ -172,16 +181,16 @@ function PQuiz() {
             <p className="text-lg mb-4">{quiz[currentQuestionIndex].question}</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {quiz[currentQuestionIndex].options.map((option) => (
-                <button 
-                  key={option.key} 
+                <button
+                  key={option.key}
                   className={`p-3 rounded text-left transition-colors ${
                     showAnswer
                       ? option.key === quiz[currentQuestionIndex].correctAnswer
-                        ? 'bg-green-600'
+                        ? "bg-green-600"
                         : selectedAnswer === option.value
-                        ? 'bg-red-600'
-                        : 'bg-gray-700'
-                      : 'bg-gray-700 hover:bg-gray-600'
+                        ? "bg-red-600"
+                        : "bg-gray-700"
+                      : "bg-gray-700 hover:bg-gray-600"
                   }`}
                   onClick={() => handleAnswer(option.value)}
                   disabled={showAnswer}
@@ -192,12 +201,6 @@ function PQuiz() {
             </div>
             {showAnswer && (
               <div className="mt-4">
-                <p className="text-lg font-semibold">
-                  {selectedAnswer === quiz[currentQuestionIndex].options.find(o => o.key === quiz[currentQuestionIndex].correctAnswer).value
-                    ? "Correct!"
-                    : "Incorrect. The correct answer is: " + quiz[currentQuestionIndex].options.find(o => o.key === quiz[currentQuestionIndex].correctAnswer).value
-                  }
-                </p>
                 <button
                   onClick={nextQuestion}
                   className="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out"
@@ -206,6 +209,12 @@ function PQuiz() {
                 </button>
               </div>
             )}
+          </div>
+        )}
+        {quizFinished && (
+          <div className="bg-gray-800 p-6 rounded-lg shadow-lg text-center">
+            <h2 className="text-2xl font-bold mb-4">Quiz Completed!</h2>
+            <p className="text-xl">Your Score: {score} / {quiz.length}</p>
           </div>
         )}
       </main>

@@ -63,7 +63,7 @@ export default function PythonTutor() {
     5. If applicable, suggest resources or next steps the student can take to learn more about this topic.
     Never use * and astericks, do not use any formatting in your answers. 
     Do not use any markdown formatting in your response. 
-    For foramttin you can only use /n . 
+    You can use new lines but no * or ** at all , no formatting allowed. 
     Your goal is to make the concept as approachable and understandable as possible for a new Python learner. Be friendly and patient in your response!`
     
     try {

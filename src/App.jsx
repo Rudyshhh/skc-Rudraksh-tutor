@@ -1,6 +1,5 @@
 import './App.css';
 import React from 'react';
-import Home from './components/home';
 import ScrollToTop from './components/scroll';
 import PythonTutor from './tutor'; 
 import PQuiz from './PYQuiz';
