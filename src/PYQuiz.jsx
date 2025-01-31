@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { Menu, Loader2, LogOut } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
@@ -113,6 +113,16 @@ function PQuiz() {
     }
   };
 
+  const retakeQuiz = () => {
+    setClassLevel("");
+    setQuiz(null);
+    setCurrentQuestionIndex(0);
+    setSelectedAnswer(null);
+    setShowAnswer(false);
+    setScore(0);
+    setQuizFinished(false);
+  };
+
   const handleLogout = () => {
     navigate("/");
   };
@@ -127,8 +137,6 @@ function PQuiz() {
           <h1 className="text-3xl font-bold random">Python Tutor</h1>
         </Link>
       </header>
-
-
 
       <main className="container mx-auto px-4 py-8">
         <form onSubmit={handleSubmit} className="mb-8">
@@ -211,6 +219,12 @@ function PQuiz() {
           <div className="bg-gray-800 p-6 rounded-lg shadow-lg text-center">
             <h2 className="text-2xl font-bold mb-4">Quiz Completed!</h2>
             <p className="text-xl">Your Score: {score} / {quiz.length}</p>
+            <button
+              onClick={retakeQuiz}
+              className="mt-4 bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out"
+            >
+              Retake Quiz
+            </button>
           </div>
         )}
       </main>
