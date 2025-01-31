@@ -1,8 +1,8 @@
 {
   "compileOnSave": true,
-  // "include": [
-  //   "src"
-  // ],
+  "include": [
+    "src"
+  ],
   "compilerOptions": {
     "module": "commonjs",
     "noImplicitReturns": true,
@@ -19,10 +19,6 @@
       ]
     }
   },
-  // new line
-  "include": ["src/**/*"], 
-  "exclude": ["node_modules", "dist"],
-
   "files": [],
   "references": [
     {
