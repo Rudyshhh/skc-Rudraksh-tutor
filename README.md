@@ -1,116 +1,102 @@
-# Soulace: Putting Soul into Education
+# Python Tutor Quiz App
 
-<div align="center"> <img src="public/logo.png" alt="Screenshot of Student Dashboard" width="300"/></div>
+## Overview
 
-Welcome to Soulace, an innovative web application designed to enhance the educational experience for both students and parents. At Soulace, we believe that learning is a journey best undertaken together. Our platform fosters collaboration between parents and children, providing a range of tools to support learning, engagement, and academic success.
+Welcome to the **Python Tutor Quiz App**, a web application designed to help students practice Python through dynamic and high-difficulty quizzes. The app generates Python programming quizzes tailored to a student's class level and evaluates their knowledge with multiple-choice questions.
 
-## Table of Contents
+Once the quiz is completed, the user can review their score and retake the quiz to further improve their knowledge. The quiz content is generated using Google's generative AI, which ensures that the quizzes are challenging and relevant.
 
-- [Introduction](#introduction)
-- [Features](#features)
-  - [For Students](#for-students)
-  - [For Parents](#for-parents)
-- [Technologies Used](#technologies-used)
-- [Installation](#installation)
-
-## Introduction
-
-Soulace is more than just an educational tool; it's a comprehensive platform where students and parents can interact, learn, and grow together. Whether it's tackling challenging subjects or engaging in fun educational games, Soulace aims to create a supportive environment that nurtures curiosity and fosters a love of learning.
+### Deployed App Link:
+You can access the deployed application here:  
+[Python Tutor Quiz App](https://skc-rudraksh-tutor.vercel.app/)
 
 ## Features
 
-### For Students:
-- **Doubt Solver**: 
-  - Students can submit their queries and receive instant answers to enhance their understanding of various subjects.
-  
-- **Educational Games**: 
-  - Engage with interactive games designed to reinforce learning concepts in a fun and engaging manner.
-  
-- **Report Card Generator**: 
-  - Generate comprehensive report cards that track academic performance and progress throughout the school year.
-  
-- **AI Quiz Generator**: 
-  - Automatically create quizzes tailored to the student's current curriculum for effective revision and practice.
+- **Dynamic Quiz Generation**: The app generates 10 high-difficulty multiple-choice questions based on the student's input class level.
+- **Instant Feedback**: Once the user answers each question, the app shows whether the answer is correct or incorrect, and highlights the correct answer.
+- **Score Calculation**: After finishing the quiz, the user's score is displayed out of 10, allowing them to evaluate their performance.
+- **Retake Quiz Option**: After completing the quiz, users can retake it without having to reload the page, giving them an opportunity to improve their score.
+- **Responsive Design**: The app works seamlessly across devices and screen sizes, ensuring a smooth user experience on both mobile and desktop.
 
-### For Parents:
-- **Report Card Generator**: 
-  - Parents can easily create and manage their child's report cards, allowing for better oversight of academic performance.
-  
-- **Educational Tips**: 
-  - Access a library of helpful resources and tips to support their child's learning journey and help with homework.
-  
-- **Blog Forum**: 
-  - Participate in discussions, share experiences, and connect with other parents in a supportive community forum.
-  
-- **School Information**: 
-  - Stay updated with essential information about their child's school, including announcements, events, and resources.
+## How It Works
+
+1. **User Input**: The user enters their class level (e.g., "Intermediate" or "Advanced") into the input field.
+2. **Quiz Generation**: Upon submitting the form, the app generates a quiz with 10 multiple-choice questions related to Python programming, using Google's Generative AI.
+3. **Answering Questions**: The user answers the questions, and after each question, the app provides immediate feedback on whether the answer was correct.
+4. **Viewing Score**: At the end of the quiz, the user sees their total score, which is the number of correct answers.
+5. **Retake Option**: After reviewing the score, users can retake the quiz by clicking the "Retake Quiz" button.
+
+## Setup and Usage
+
+### Prerequisites
+
+Before running the app locally, make sure you have the following installed:
+- [Node.js](https://nodejs.org/) (version 14 or higher)
+- [npm](https://www.npmjs.com/) (Node Package Manager)
+
+### Steps to Run the App Locally
+
+1. **Clone the Repository**:  
+   Clone this repository to your local machine using the following command:
+   ```bash
+   git clone https://github.com/your-username/python-tutor-quiz.git
+   ```
+
+2. **Install Dependencies**:  
+   Navigate to the project directory and install the required dependencies:
+   ```bash
+   cd python-tutor-quiz
+   npm install
+   ```
+
+3. **Set Your API Key**:  
+   To use the Generative AI model, you'll need a valid API key.  
+   - Open the `key.js` file.
+   - Replace the placeholder `API_KEY` with your actual API key. For example:
+     ```javascript
+     export const API_KEY = "YOUR_GOOGLE_GENERATIVE_API_KEY";
+     ```
+
+4. **Start the Application**:  
+   Run the app locally by starting the development server:
+   ```bash
+   npm start
+   npm run build
+   ```
+
+
+## Project Structure
+
+- **`src/`**: Contains all the React components and app logic.
+- **`key.js`**: Stores the API key needed to access Google's Generative AI service.
+- **`public/`**: Contains the `index.html` file and static assets (e.g., images, icons).
+- **`package.json`**: Manages project dependencies and scripts.
+
+
+## Changing the API Key
+If you wish to use your own API key, simply update the `key.js` file:
+1. Open `key.js`.
+2. Replace the placeholder with your own API key.
+
+
 
 ## Technologies Used
 
-Soulace is built using a combination of powerful technologies:
+- **React**: JavaScript library for building the user interface.
+- **Google Generative AI**: Powers the dynamic quiz generation based on the provided class level.
+- **Vercel**: Deployed the app using Vercel for seamless hosting.
 
-- **Frontend**: 
-  - **React**: A popular JavaScript library for building user interfaces, enabling a dynamic and responsive user experience.
-  
-- **Backend**: 
-  - **Cosmocloud**: A robust backend solution that provides secure data management and application logic.
-  
-- **Database**: 
-  - **MongoDB Atlas Vector Search**: A cloud database solution that offers flexible data storage and powerful search capabilities.
-  
-- **AI**: 
-  - **Gemini AI**: Integrating advanced AI technology to provide intelligent solutions such as the doubt solver and quiz generator.
-  
-- **IDE**: 
-  - **Project IDX**: An online coding IDE by Google for development.
 
-## Installation
+## Contributing
 
-To run the Soulace web application locally, follow these steps:
+If you'd like to contribute to this project, feel free to fork the repository and submit a pull request. Here's how you can contribute:
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes and commit them.
+4. Push your changes to your forked repository.
+5. Submit a pull request for review.
 
-1. **Clone the repository**:
+---
 
-   ```bash
-   git clone https://github.com/yourusername/Soulace.git
-   ```
-   
-Navigate to the project directory:
-
-```bash
-cd Soulace
+Thank you for using the Python Tutor Quiz App! Enjoy testing and improving your Python skills!
 ```
-
-Install the necessary dependencies:
-
-```bash
-npm install
-```
-
-# Steps to Run
-Once the dependencies are installed, follow these steps to run the Soulace web app:
-
-## Run the application:
-
-```bash
-npm start
-```
-
-This will start the React development server, and the application should now be running locally on http://localhost:3000.
-
-## Access the application:
-
-Open your web browser and go to http://localhost:3000.
-
-### Login or Sign Up:
-
-For the demo version, the user database is not implemented yet. You can log in as student or as parent using any blank username and password.
-
-### Explore the Features:
-
-Students can solve doubts, play educational games, and generate quizzes.
-Parents can generate report cards, participate in forums, and access tips and school information.
-
-## Stop the server:
-
-To stop the application, press Ctrl+C in your terminal where the server is running.
-
