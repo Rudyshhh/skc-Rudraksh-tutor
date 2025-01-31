@@ -17,7 +17,8 @@ import Studentlanding from './components/student-landing';
 import Tips2 from './components/tips2';
 import Doubts from './components/videos';
 import ScrollToTop from './components/scroll';
-
+import PythonTutor from './PythonTutor'; 
+import PYQuiz from './PYQuiz';
 
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 
