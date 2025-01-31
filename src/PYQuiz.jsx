@@ -21,6 +21,10 @@ function PQuiz() {
 
   const genAI = new GoogleGenerativeAI(API_KEY);
 
+  const cleanResponse = (text) => {
+    return text.trim();
+  };
+
   const generateQuizPrompt = (classLevel) => `
     Generate a quiz with 10 multiple-choice high difficulty questions for a ${classLevel} student studying Python.
     For each question, provide 4 options (A, B, C, D) with one correct answer. 
@@ -54,10 +58,12 @@ function PQuiz() {
     const prompt = generateQuizPrompt(classLevel);
 
     try {
+      setLoading(true);  
       const result = await model.generateContent(prompt);
       const response = await result.response;
-      const text = response.text();
+      const text = cleanResponse(response.text());
       console.log(text);
+
       const parsedData = parseQuizData(text);
 
       if (parsedData.length !== 10) {
@@ -76,7 +82,7 @@ function PQuiz() {
         setError("Failed to generate quiz. Please try again.");
       }
     } finally {
-      setLoading(false);
+      setLoading(false);  
     }
   }, [classLevel]);
 
