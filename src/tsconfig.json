@@ -6,8 +6,7 @@
   "compilerOptions": {
     "module": "commonjs",
     "noImplicitReturns": true,
-    // "outDir": "lib",
-    "outDir": "./dist",
+    "outDir": "lib",
     "sourceMap": true,
     "strict": true,
     "target": "es2017",
