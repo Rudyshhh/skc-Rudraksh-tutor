@@ -19,6 +19,8 @@
       ]
     }
   },
+  // new line
+  "include": ["src/**/*"], 
   "files": [],
   "references": [
     {
