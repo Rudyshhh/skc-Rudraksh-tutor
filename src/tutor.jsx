@@ -4,7 +4,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai"
 import { LogOut } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 
-const API_KEY = "AIzaSyDHn-oScIvJPt5td5SKqz7fFYLPS2bq_mo"
+import { API_KEY } from './key';
 const MAX_RETRIES = 100
 const RETRY_DELAY = 1000
 
@@ -37,6 +37,10 @@ const Input = ({ value, onChange, onKeyPress, placeholder }) => (
   />
 )
 
+const cleanResponseText = (text) => {
+  return text.replace(/(\*\*|\*|`)/g, '');  
+};
+
 export default function PythonTutor() {
   const [showChat, setShowChat] = useState(false)
   const [messages, setMessages] = useState([])
@@ -44,6 +48,7 @@ export default function PythonTutor() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [isQuizMode, setIsQuizMode] = useState(false)
+  const [tutorChoice, setTutorChoice] = useState("Charlie") 
   const chatRef = useRef(null)
   const chatContainerRef = useRef(null)
 
@@ -51,27 +56,39 @@ export default function PythonTutor() {
 
   const generateResponse = useCallback(async (retryCount = 0) => {
     const model = genAI.getGenerativeModel({ model: "gemini-pro" })
-    const prompt = `You are a Python Tutor. Your student asks: "${input}"
-    Talk like a human, if input is not a quetion or a lesson.
-    If its a question.
-    Please explain this concept in a simple and clear way, suitable for a beginner. Break it down into easy-to-understand steps and provide multiple examples wherever applicable. 
-    Include the following:
-    1. A basic explanation of the concept.
-    2. Real-life analogies to help the student understand better.
-    3. One or more examples of how the concept is used in Python code, with an explanation of each step in the example.
-    4. Any common mistakes beginners might make, and how to avoid them.
-    5. If applicable, suggest resources or next steps the student can take to learn more about this topic.
-    Never use * and astericks, do not use any formatting in your answers. 
-    Do not use any markdown formatting in your response. 
-    You can use new lines but no * or ** at all , no formatting allowed. 
-    Your goal is to make the concept as approachable and understandable as possible for a new Python learner. Be friendly and patient in your response!`
+    const prompt = tutorChoice === "Charlie"
+      ? `You are a Python Tutor. Your student asks: "${input}" 
+      Talk like a human, if input is not a question or a lesson.
+      If its a question.
+      Please explain this concept in a simple and clear way, suitable for a beginner. Break it down into easy-to-understand steps and provide multiple examples wherever applicable. 
+      Include the following:
+      1. A basic explanation of the concept.
+      2. Real-life analogies to help the student understand better.
+      3. One or more examples of how the concept is used in Python code, with an explanation of each step in the example.
+      4. Any common mistakes beginners might make, and how to avoid them.
+      5. If applicable, suggest resources or next steps the student can take to learn more about this topic.
+      
+      Your goal is to make the concept as approachable and understandable as possible for a new Python learner. Be friendly and patient in your response!`
+      : `You are a Python Tutor. Talk in Gen Z lingo Your student asks: "${input}"
+      Talk like a human, if input is not a question or a lesson.
+      If its a question.
+      Please explain this concept in a simple and clear way, suitable for a beginner. Break it down into easy-to-understand steps and provide multiple examples wherever applicable. 
+      Include the following:
+      1. A basic explanation of the concept.
+      2. Real-life analogies to help the student understand better.
+      3. One or more examples of how the concept is used in Python code, with an explanation of each step in the example.
+      4. Any common mistakes beginners might make, and how to avoid them.
+      5. If applicable, suggest resources or next steps the student can take to learn more about this topic.
+      
+      Your goal is to make the concept as approachable and understandable as possible for a new Python learner. Be friendly and patient in your response!`
     
     try {
       const result = await model.generateContent(prompt)
       const response = await result.response
       const text = response.text()
-      
-      setMessages(prev => [...prev, { role: 'assistant', content: text }])
+      const cleanedText = cleanResponseText(text);  
+
+      setMessages(prev => [...prev, { role: 'assistant', content: cleanedText }])  
       setError(null)
       setLoading(false)
     } catch (error) {
@@ -83,7 +100,7 @@ export default function PythonTutor() {
         setLoading(false)
       }
     }
-  }, [input, genAI])
+  }, [input, genAI, tutorChoice])
 
   const handleSend = useCallback(() => {
     if (input.trim()) {
@@ -97,7 +114,7 @@ export default function PythonTutor() {
 
   useEffect(() => {
     if (showChat && messages.length === 0) {
-      setInput("I want to learn Python!")
+      setInput("Hello Charlie!")
       handleSend()
     }
   }, [showChat, messages.length, handleSend])
@@ -133,24 +150,21 @@ export default function PythonTutor() {
     <div className="min-h-screen bg-gray-900 text-white">
       <header className="bg-teal-900 p-4 flex justify-between items-center">
         <Link to="/" className="flex items-center space-x-2">
-          <img
-            className="h-14 w-14 text-yellow-400"
-            src="/logo.png"
-            alt="Soulace logo"
-          />
           <h1 className="text-3xl font-bold random">Python Tutor</h1>
         </Link>
-        <button
-          className="md:hidden"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          aria-label="Toggle menu"
-        >
-          <Menu className="h-6 w-6" />
-        </button>
       </header>
 
       <main className="container mx-auto px-4 py-8">
         <h2 className="text-3xl font-bold mb-6 text-center">Learn Python with Charlie</h2>
+
+        <p className="text-center text-lg mb-8">
+        This Python tutor app is designed to make learning Python easy, engaging, and personalized for students at all levels. It features an interactive chatbot that allows you to choose between two distinct tutors: Charlie, who provides clear and patient explanations, and The Cooler Charlie, who adopts a fun and energetic Gen Z approach to teaching. 
+<br></br> <br></br> <br></br>
+The app adapts to your individual learning style and offers tailored responses to your questions, ensuring a more effective and enjoyable learning experience. One of its standout features is a dynamic quiz system that generates questions based on your current class level, helping you test and reinforce your knowledge at an appropriate pace. Whether you are a beginner just starting out or an advanced student looking to challenge yourself, the quiz adjusts to match your progress.
+<br></br> <br></br> <br></br>
+The app's design is sleek, intuitive, and user-friendly, making the process of learning Python interactive and accessible while keeping you motivated with personalized content.
+<br></br><br></br><br></br>
+        </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <Card
@@ -167,15 +181,25 @@ export default function PythonTutor() {
           />
         </div>
 
+        <div className="text-center mb-8">
+          <h3 className="text-2xl font-bold mb-4">Choose Your Tutor</h3>
+          <Button onClick={() => setTutorChoice("Charlie")} className="mx-4">
+            Charlie
+          </Button>
+          <Button onClick={() => setTutorChoice("The Cooler Charlie")} className="mx-4">
+            The Cooler Charlie
+          </Button>
+        </div>
+
         {!showChat && !isQuizMode && (
           <Button onClick={() => setShowChat(true)} className="w-full max-w-md mx-auto block">
-            Chat with Charlie
+            Chat with {tutorChoice}
           </Button>
         )}
 
         {showChat && (
           <div ref={chatContainerRef} className="bg-gray-800 p-6 rounded-lg shadow-lg mt-8 max-w-2xl mx-auto">
-            <h3 className="text-2xl font-bold mb-4 text-center">Chat with Charlie</h3>
+            <h3 className="text-2xl font-bold mb-4 text-center">Chat with {tutorChoice}</h3>
             <div ref={chatRef} className="h-96 overflow-y-auto mb-4 pr-4 space-y-4">
               {messages.map((message, index) => (
                 <div key={index} className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>

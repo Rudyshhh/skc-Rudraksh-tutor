@@ -4,7 +4,7 @@ import { Menu, Loader2, LogOut } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
-const API_KEY = "AIzaSyDHn-oScIvJPt5td5SKqz7fFYLPS2bq_mo";
+import { API_KEY } from './key';
 const MAX_RETRIES = 100;
 const RETRY_DELAY = 1000;
 
@@ -118,21 +118,11 @@ function PQuiz() {
     <div className="min-h-screen bg-gray-900 text-white">
       <header className="bg-teal-900 p-4 flex justify-between items-center">
         <Link to="/" className="flex items-center space-x-2">
-          <img
-            className="h-14 w-14 text-yellow-400"
-            src="/logo.png"
-            alt="Soulace logo"
-          />
-          <h1 className="text-3xl font-bold">Python Tutor</h1>
+          <h1 className="text-3xl font-bold random">Python Tutor</h1>
         </Link>
-        <button
-          className="md:hidden"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          aria-label="Toggle menu"
-        >
-          <Menu className="h-6 w-6" />
-        </button>
       </header>
+
+
 
       <main className="container mx-auto px-4 py-8">
         <form onSubmit={handleSubmit} className="mb-8">
